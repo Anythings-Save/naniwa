@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暗号化動画プレイヤー</title>
+</head>
+<body>
+    <video id="videoPlayer" controls>
+        <source id="videoSource" src="" type="video/mp4">
+        お使いのブラウザは動画タグに対応していません。
+    </video>
+
+    <script>
+        async function decryptVideo(url, password) {
+            const response = await fetch(url);
+            const encryptedData = await response.arrayBuffer();
+
+            // IVのサイズは16バイト（AESのブロックサイズ）
+            const iv = new Uint8Array(encryptedData.slice(0, 16));
+            const dataToDecrypt = new Uint8Array(encryptedData.slice(16));
+
+            // Web Crypto APIを使って復号化
+            const key = await window.crypto.subtle.importKey(
+                "raw",
+                await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(password)),
+                { name: "AES-CBC" },
+                false,
+                ["decrypt"]
+            );
+
+            try {
+                const decryptedData = await window.crypto.subtle.decrypt(
+                    { name: "AES-CBC", iv: iv },
+                    key,
+                    dataToDecrypt
+                );
+
+                const blob = new Blob([decryptedData], { type: 'video/mp4' });
+                const videoUrl = URL.createObjectURL(blob);
+                document.getElementById('videoSource').src = videoUrl;
+                document.getElementById('videoPlayer').load();
+            } catch (error) {
+                console.error('復号化エラー:', error);
+            }
+        }
+
+        // 動画の復号化と再生
+        const password = "yourpassword"; // 同じパスワードを使う
+        decryptVideo('encrypted.mp4', password);
+    </script>
+</body>
+</html>
