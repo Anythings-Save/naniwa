@@ -6,7 +6,7 @@ document.getElementById("execute-button").addEventListener("click", function () 
 
     // Base64でエンコードされた正しいパスワード
     var correctPassword = "MA=="; // 正しいパスワード（Base64）
-    var base64VideoUrl = "aHR0cDovL2xvY2FsaG9zdDo4MDAwLzIvaW5kZXgubXBk"; // "http://localhost:8000/2/index.mpd"のBase64
+    var base64VideoUrl = "Mi9pbmRleC5tcGQ="; // "http://localhost:8000/2/index.mpd"のBase64
     var videoUrl = atob(base64VideoUrl); // Base64をデコードしてURLを取得
 
     // パスワードチェック
