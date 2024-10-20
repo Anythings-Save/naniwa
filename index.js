@@ -1,63 +1,57 @@
-document.getElementById("execute-button").addEventListener("click", async function () {
-    var password = document.getElementById("password-input").value;
-    var encryptedPassword = btoa(password); // パスワードをBase64でエンコード
+let isPasswordCorrect = false; // パスワードが正しいかどうかのフラグ
 
-    // 暗号化された動画のURL
-    var etchAndDecryptVideo = "aHR0cHM6Ly9zMy5hcC1ub3J0aGVhc3QtMS1udHQud2FzYWJpc3lzLmNvbS9hazE1MjBkLWZpbGVub3ctNi9maWxlcy8yMDI0MTAxOS0wNDA2X2IzNDE3MTBjYmY2NDE3Mjk3ZWM3MjMyMWFkNGU0MjhhLm1wNA==";
+document.getElementById("execute-button").addEventListener("click", function () {
+    var password = document.getElementById("password-input").value;
+    var encryptedPassword = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(password));
+
+    // Base64でエンコードされた正しいパスワード
+    var correctPassword = "MA=="; // 正しいパスワード（Base64）
+    var base64VideoUrl = "aHR0cDovL2xvY2FsaG9zdDo4MDAwLzIvaW5kZXgubXBk"; // "http://localhost:8000/2/index.mpd"のBase64
+    var videoUrl = atob(base64VideoUrl); // Base64をデコードしてURLを取得
 
     // パスワードチェック
-    if (encryptedPassword === "TmlzaGloYXRhXzAxMDk=") {
+    if (isPasswordCorrect) {
+        // 既にパスワードが正しい場合は何もしない
+        return;
+    }
+
+    if (encryptedPassword === correctPassword) {
         // パスワードが一致する場合
+        isPasswordCorrect = true; // フラグを更新
         document.getElementById("password-container").classList.add("hide");
         document.getElementById("player-container").classList.remove("hide");
         document.getElementById("warning").style.display = "none";
 
-        // 動画をフェッチして復号化
-        await fetchAndDecryptVideo(atob(etchAndDecryptVideo)); // Base64でエンコードされたURLをデコードして渡す
+        // Video.jsとShaka Playerを初期化
+        var player = videojs('my-video', {
+            techOrder: ['shaka', 'html5'],
+            shaka: {
+                drm: {
+                    clearKeys: {
+                        'aa40a4ddc7ab0ea77340975ccd230fc7': '359bce01a7527ed2bdf8870b88f4d0b6'
+                    }
+                }
+            },
+            fluid: false // 固定サイズにする
+        });
+
+        // 動画を再生
+        player.src({ src: videoUrl, type: 'application/dash+xml' });
+        player.load();
+        player.play(); // 再生を開始
     } else {
         // パスワードが一致しない場合
-        document.getElementById("warning").style.display = "block";
+        if (!isPasswordCorrect) { // フラグがfalseの場合のみ警告を表示
+            document.getElementById("warning").innerText = "パスワードが間違っています。";
+            document.getElementById("warning").style.display = "block";
+        }
     }
 });
 
-async function fetchAndDecryptVideo(videoUrl) {
-    try {
-        const response = await fetch(videoUrl);
-        if (!response.ok) {
-            throw new Error("動画の取得に失敗しました: " + response.statusText);
-        }
-
-        const data = await response.arrayBuffer();
-        const iv = new Uint8Array(data.slice(0, 16));
-        const ciphertext = new Uint8Array(data.slice(16));
-
-        const key = CryptoJS.enc.Hex.parse('dd34716876364a02d0195e2fb9ae2d1b');
-
-        const cipherBytes = CryptoJS.lib.WordArray.create(ciphertext);
-        const ivHex = CryptoJS.enc.Hex.parse(Array.from(iv).map(b => ('0' + b.toString(16)).slice(-2)).join(''));
-
-        const decrypted = CryptoJS.AES.decrypt(
-            { ciphertext: cipherBytes },
-            key,
-            {
-                iv: ivHex,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            }
-        );
-
-        // Blobの作成とURLの生成
-        const decryptedArray = new Uint8Array(decrypted.words.map(word => [
-            word >> 24, (word >> 16) & 0xff, (word >> 8) & 0xff, word & 0xff
-        ]).flat());
-        const decryptedBlob = new Blob([decryptedArray], { type: 'video/mp4' });
-        const url = URL.createObjectURL(decryptedBlob);
-
-        document.getElementById('videoSource').src = url;
-        document.getElementById('my-video').load();
-    } catch (error) {
-        console.error("エラー:", error);
-        document.getElementById("warning").innerText = "動画の復号化に失敗しました。";
-        document.getElementById("warning").style.display = "block";
+// パスワード入力フィールドの変更イベントをリッスン
+document.getElementById("password-input").addEventListener("input", function () {
+    // 警告メッセージを非表示にする
+    if (document.getElementById("warning").style.display === "block") {
+        document.getElementById("warning").style.display = "none";
     }
-}
+});

@@ -1,21 +1,22 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="ja">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-    <title></title>
+    <title>動画再生</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/alt/video-js-cdn.min.css" rel="stylesheet">
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/shaka-player/2.1.0/shaka-player.compiled.js"></script>
+    <script src="js/videojs-shaka.js"></script>
     <link href="video-js.css" rel="stylesheet">
-    
-    <script>
-        // default options
-        ConsoleBan.init()
-        // custom options
-        ConsoleBan.init({
-            redirect: '/404'
-        })
-    </script>
+    <script src="console-ban.js"></script>
+   
     <style>
 
         /*ウィンドウの拡大縮小を禁止する*/
@@ -23,6 +24,9 @@
             touch-action: none;
         }
 
+        body{
+            margin: 1px;
+        }
         /* ナビゲーションスタイル */
         nav {
             border: solid 1px #F0F0F0;
@@ -49,49 +53,54 @@
                         text-decoration: none;
                     }
 
-        #password-container {
-            display: flex;
-            padding: 2vh;
-            justify-content: center;
-            align-items: center;
-        }
+                    #password-container {
+    display: flex;
+    padding: 2vh;
+    justify-content: center;
+}
 
-        .password-form {
-            text-align: center;
-            margin-top: 200px;
-        }
+#password-input {   
+    margin-right: 5px; /* ボタンとのスペース */
+    font-size: 16px; /* フォントサイズを揃える */
+}
 
+#execute-button {
+    height: 26px; /* フォームと同じ高さに設定 */
+    padding: 0 20px; /* ボタンのパディング */
+    font-size: 16px; /* フォントサイズを揃える */
+}
 
-        #warning {
-            display: none;
-            color: red;
-            margin-top: -5vh;
-            margin-bottom: -2%;
-        }
-
-            #warning p {
-                display: flex;
-                padding: 2vh;
-                justify-content: center;
-                align-items: center;
-            }
-
-        .hide {
-            display: none;
-        }
+.password-form {
+    text-align: center;
+    margin-top: 200px;
+}
 
 
-        #timer {
-            font-size: 100%;
-            text-align: center;
-            margin-top: -2vh;
-        }
+.hide {
+    display: none;
+}
 
-        #player-container {
-            display: flex;
-            justify-content: center;
-            height: 100vh;
-        }
+#warning {
+    display: none;
+    color: red;
+    text-align: center; /* 中央揃え */
+    margin-bottom: 10px; /* タイマーとの間にスペースを追加 */
+}
+
+#countdown {
+    text-align: center; /* 中央揃え */
+    padding-right:4%;
+}
+
+
+
+#player-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh; /* 画面全体の高さを使う */
+    margin-top: 20px;
+}
+
 
 
         .video-js {
@@ -130,14 +139,67 @@
         .video-js.vjs-has-started .vjs-control-bar {
             opacity: 1;
         }
+        /*スマートフォン*/
+        @media (max-width: 600px) {
+        body {
+        background-color: lightblue;
+         }
 
-        @media (max-width: 767px) {
-            /* スマートフォンではビデオプレーヤーをフル幅に表示 */
-            .video-js {
-                width: 100%;
-                height: 25%;
-            }
+         #execute-button {
+         height: 26px;
+         padding:0;
+         font-size: 16px;
         }
+
+        .video-js{
+            width:100%;
+            height: 20%;
+        }
+
+       }
+       
+
+       
+        /*タブレット*/
+       @media (min-width: 601px) and (max-width: 900px) {
+       body {
+        background-color: lightgreen;
+         }
+
+         .video-js{
+            width:100%;
+            height: 30%;
+        }
+       }
+
+        /*tablet-PC*/
+       @media (min-width: 901px) {
+       body {
+        background-color: lightcoral;
+        }
+
+        .video-js{
+            width:100%;
+            height: 30%;
+        }
+       }
+
+       /*PC*/
+       @media (min-width: 901px) and (orientation: landscape) {
+       body {
+        background-color: lightseagreen;
+       }
+       .video-js{
+            width:50%;
+            height: 50%;
+        }
+       
+      }
+
+
+
+
+
         /*ウィンドウの回転を禁止する*/
         @media (orientation: landscape) {
             body {
@@ -168,80 +230,20 @@
     <div id="warning">
         <p>パスワードが間違っています。</p>
     </div>
-    <div id="countdown">
+    <div id="countdown">        
         <div id="timer"></div>
     </div>
+    
     <div id="player-container" class="hide">
-        <video id="my-video" class="video-js vjs-default-skin" width="640" height="360" poster="サムネイル.png" autoplay>
-            <source id="videoSource" src="" type="video/mp4">
+        <video id="my-video" class="video-js" autoplay width="640" height="360" poster="サムネイル.png">
+            <source id="videoSource" src="" type="application/dash+xml">
+            お使いのブラウザはvideoタグに対応していません。
         </video>
-        <script>
-            document.getElementById("execute-button").addEventListener("click", async function () {
-    var password = document.getElementById("password-input").value;
-    var encryptedPassword = btoa(password); // パスワードをBase64でエンコード
+    </div>
+    
 
-    // 暗号化された動画のURL
-    var etchAndDecryptVideo = "aHR0cHM6Ly9zMy5hcC1ub3J0aGVhc3QtMS1udHQud2FzYWJpc3lzLmNvbS9hazE1MjBkLWZpbGVub3ctMS9maWxlcy8yMDI0MTAyMC0wMTE5XzlmYjg2ZmVkNDY4ZGQyMzM3YzAxMGY0OTVmYzUxZjg2Lm1wNA==";
+<script src="timer.js"></script>
+<script src="index.js"></script>
 
-    // パスワードチェック
-    if (encryptedPassword === "TmlzaGloYXRhXzAxMDk=") {
-        // パスワードが一致する場合
-        document.getElementById("password-container").classList.add("hide");
-        document.getElementById("player-container").classList.remove("hide");
-        document.getElementById("warning").style.display = "none";
-
-        // 動画をフェッチして復号化
-        await fetchAndDecryptVideo(atob(etchAndDecryptVideo)); // Base64でエンコードされたURLをデコードして渡す
-    } else {
-        // パスワードが一致しない場合
-        document.getElementById("warning").style.display = "block";
-    }
-});
-
-async function fetchAndDecryptVideo(videoUrl) {
-    try {
-        const response = await fetch(videoUrl);
-        if (!response.ok) {
-            throw new Error("動画の取得に失敗しました: " + response.statusText);
-        }
-
-        const data = await response.arrayBuffer();
-        const iv = new Uint8Array(data.slice(0, 16));
-        const ciphertext = new Uint8Array(data.slice(16));
-
-        const key = CryptoJS.enc.Hex.parse('dd34716876364a02d0195e2fb9ae2d1b');
-
-        const cipherBytes = CryptoJS.lib.WordArray.create(ciphertext);
-        const ivHex = CryptoJS.enc.Hex.parse(Array.from(iv).map(b => ('0' + b.toString(16)).slice(-2)).join(''));
-
-        const decrypted = CryptoJS.AES.decrypt(
-            { ciphertext: cipherBytes },
-            key,
-            {
-                iv: ivHex,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            }
-        );
-
-        // Blobの作成とURLの生成
-        const decryptedArray = new Uint8Array(decrypted.words.map(word => [
-            word >> 24, (word >> 16) & 0xff, (word >> 8) & 0xff, word & 0xff
-        ]).flat());
-        const decryptedBlob = new Blob([decryptedArray], { type: 'video/mp4' });
-        const url = URL.createObjectURL(decryptedBlob);
-
-        document.getElementById('videoSource').src = url;
-        document.getElementById('my-video').load();
-    } catch (error) {
-        console.error("エラー:", error);
-        document.getElementById("warning").innerText = "動画の復号化に失敗しました。";
-        document.getElementById("warning").style.display = "block";
-    }
-}
-        </script>
-
-    </div>    
-   
 </body>
 </html>
