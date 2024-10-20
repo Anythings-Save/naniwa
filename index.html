@@ -96,12 +96,23 @@
 
 #player-container {
     display: flex;
+    position: relative;
     justify-content: center;
     height: 100vh; /* 画面全体の高さを使う */
     margin-top: 20px;
 }
 
-
+#watched-message {
+    position: absolute; /* サムネイルの位置に合わせて配置 */
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 中央に配置 */
+    color: white; /* 文字色 */
+    background: rgba(0, 0, 0, 0.7); /* 半透明の背景 */
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center; /* 文字を中央揃え */
+}
 
         .video-js {
             display: flex;
@@ -155,9 +166,12 @@
             width:100%;
             height: 20%;
         }
-
-       }
-       
+                
+        #watched-message {
+            top: 12%;
+            left: 50%;
+        }
+    }
 
        
         /*タブレット*/
@@ -171,6 +185,11 @@
             height: 30%;
         }
        }
+
+       #watched-message {
+            top: 16%;
+            left: 50%;
+        }
 
         /*tablet-PC*/
        @media (min-width: 901px) {
@@ -194,6 +213,10 @@
             height: 50%;
         }
        
+        #watched-message {
+            top: 26%;
+            left: 50%;
+        }
       }
 
 
@@ -239,11 +262,12 @@
             <source id="videoSource" src="" type="application/dash+xml">
             お使いのブラウザはvideoタグに対応していません。
         </video>
+        <div id="watched-message" style="display:none;">視聴済み</div>
     </div>
     
 
-<script src="timer.js"></script>
-<script src="index.js"></script>
+    <script src="access.js"></script>
+    <script src="index.js"></script>
 
 </body>
 </html>
