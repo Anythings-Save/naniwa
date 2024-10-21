@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<MPD mediaPresentationDuration="PT7M41.661S" minBufferTime="PT8.18S" profiles="urn:mpeg:dash:profile:isoff-live:2011" type="static" xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:cenc="urn:mpeg:cenc:2013">
+  <!-- Created with Bento4 mp4-dash.py, VERSION=2.0.0-640 -->
+  <Period>
+    <!-- Video -->
+    <AdaptationSet maxHeight="720" maxWidth="1280" mimeType="video/mp4" segmentAlignment="true" startWithSAP="1">
+      <!-- MPEG Common Encryption -->
+      <ContentProtection cenc:default_KID="aa40a4dd-c7ab-0ea7-7340-975ccd230fc7" schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc"/>
+      <SegmentTemplate initialization="$RepresentationID$/init.mp4" media="$RepresentationID$/seg-$Number$.m4s" startNumber="1" timescale="30000">
+        <SegmentTimeline>
+          <S d="250250" r="34"/>
+          <S d="240240"/>
+          <S d="250250" r="2"/>
+          <S d="244244"/>
+          <S d="250250" r="4"/>
+          <S d="53053"/>
+          <S d="250250" r="5"/>
+          <S d="195195"/>
+          <S d="250250" r="1"/>
+          <S d="186186"/>
+          <S d="168168"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation bandwidth="2413317" codecs="avc1.64001F" frameRate="30000/1001" height="720" id="video/avc1" scanType="progressive" width="1280"/>
+    </AdaptationSet>
+    <!-- Audio -->
+    <AdaptationSet mimeType="audio/mp4" segmentAlignment="true" startWithSAP="1">
+      <!-- MPEG Common Encryption -->
+      <ContentProtection cenc:default_KID="aa40a4dd-c7ab-0ea7-7340-975ccd230fc7" schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc"/>
+      <SegmentTemplate initialization="$RepresentationID$/init.mp4" media="$RepresentationID$/seg-$Number$.m4s" startNumber="1" timescale="48000">
+        <SegmentTimeline>
+          <S d="96256"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="96256" r="2"/>
+          <S d="95232"/>
+          <S d="82944"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation audioSamplingRate="48000" bandwidth="138534" codecs="mp4a.40.2" id="audio/und/mp4a.40.2">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:mpegB:cicp:ChannelConfiguration" value="2"/>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
