@@ -1,4 +1,10 @@
-let isPasswordCorrect = false; // パスワードが正しいかどうかのフラグ
+let isPasswordCorrect = localStorage.getItem('isPasswordCorrect') === 'true'; // localStorageからフラグを取得
+
+if (isPasswordCorrect) {
+    // ページロード時に視聴済みメッセージを表示
+    document.getElementById("watched-message").style.display = "block";
+    document.getElementById("player-container").classList.remove("hide");
+} 
 
 document.getElementById("execute-button").addEventListener("click", function () {
     var password = document.getElementById("password-input").value;
@@ -6,7 +12,7 @@ document.getElementById("execute-button").addEventListener("click", function () 
 
     // Base64でエンコードされた正しいパスワード
     var correctPassword = "MA=="; // 正しいパスワード（Base64）
-    var base64VideoUrl = "aHR0cHM6Ly9hbnl0aGluZ3Mtc2F2ZS5naXRodWIuaW8vbnR0LzIvaW5kZXgubXBk"; // "http://localhost:8000/2/index.mpd"のBase64
+    var base64VideoUrl = "aHR0cHM6Ly9hbnl0aGluZ3Mtc2F2ZS5naXRodWIuaW8vbnR0LzIvb3V0cHV0Lm1wZA=="; // "http://localhost:8000/2/index.mpd"のBase64
     var videoUrl = atob(base64VideoUrl); // Base64をデコードしてURLを取得
 
     // パスワードチェック
@@ -18,6 +24,7 @@ document.getElementById("execute-button").addEventListener("click", function () 
     if (encryptedPassword === correctPassword) {
         // パスワードが一致する場合
         isPasswordCorrect = true; // フラグを更新
+        localStorage.setItem('isPasswordCorrect', 'true'); // localStorageにフラグを保存
         document.getElementById("password-container").classList.add("hide");
         document.getElementById("player-container").classList.remove("hide");
         document.getElementById("warning").style.display = "none";

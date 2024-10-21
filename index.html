@@ -114,6 +114,30 @@
     text-align: center; /* 文字を中央揃え */
 }
 
+.centered-text {
+            text-align: center;
+            margin-top: 20%;
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #message-unsupported-browser, 
+        #message-unsupported-device, 
+        #message-countdown {
+            display: none; /* 初期は非表示 */
+        }
+
         .video-js {
             display: flex;
             top: 0;
@@ -264,9 +288,12 @@
         </video>
         <div id="watched-message" style="display:none;">視聴済み</div>
     </div>
-    
 
-    <script src="access.js"></script>
+    <div id="overlay">
+        <h1 class="centered-text" id="message-unsupported-browser"></h1>
+        <h1 class="centered-text" id="message-unsupported-device"></h1>
+        <h1 class="centered-text" id="message-countdown"></h1>
+    </div>
     <script src="index.js"></script>
 
 </body>
