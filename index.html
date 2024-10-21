@@ -22,6 +22,7 @@
         /*ウィンドウの拡大縮小を禁止する*/
         body {
             touch-action: none;
+            overflow-y: hidden; /* 縦スクロール禁止 */
         }
 
         body{
@@ -167,7 +168,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0);
             pointer-events: none;
         }
 
@@ -295,8 +296,6 @@
         <h1 class="centered-text" id="message-countdown"></h1>
     </div>
     <script src="index.js"></script>
-    <script src="access.js"></script>
-    <script src="protect.js"></script>
 
 
 </body>
