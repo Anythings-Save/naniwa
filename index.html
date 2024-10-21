@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>動画再生</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/alt/video-js-cdn.min.css" rel="stylesheet">
     <style>
@@ -168,7 +168,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.3);
             pointer-events: none;
         }
 
@@ -296,6 +296,7 @@
         <h1 class="centered-text" id="message-countdown"></h1>
     </div>
     <script src="index.js"></script>
+    <script src="protect.js"></script>
 
 
 </body>
