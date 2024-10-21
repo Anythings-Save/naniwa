@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動画再生</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/alt/video-js-cdn.min.css" rel="stylesheet">
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/5.19.1/video.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/shaka-player/2.1.0/shaka-player.compiled.js"></script>
+    <script src="js/videojs-shaka.js"></script>
+    <link href="video-js.css" rel="stylesheet">
+    <script src="console-ban.js"></script>
+   
+    <style>
+
+        /*ウィンドウの拡大縮小を禁止する*/
+        body {
+            touch-action: none;
+        }
+
+        body{
+            margin: 1px;
+        }
+        /* ナビゲーションスタイル */
+        nav {
+            border: solid 1px #F0F0F0;
+        }
+
+
+            nav ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: space-around;
+            }
+
+                nav ul li {
+                    flex: 1;
+                }
+
+                    nav ul li a {
+                        display: block;
+                        text-align: center;
+                        padding: 1vw;
+                        color: #333;
+                        text-decoration: none;
+                    }
+
+                    #password-container {
+    display: flex;
+    padding: 2vh;
+    justify-content: center;
+}
+
+#password-input {   
+    margin-right: 5px; /* ボタンとのスペース */
+    font-size: 16px; /* フォントサイズを揃える */
+}
+
+#execute-button {
+    height: 26px; /* フォームと同じ高さに設定 */
+    padding: 0 20px; /* ボタンのパディング */
+    font-size: 16px; /* フォントサイズを揃える */
+}
+
+.password-form {
+    text-align: center;
+    margin-top: 200px;
+}
+
+
+.hide {
+    display: none;
+}
+
+#warning {
+    display: none;
+    color: red;
+    text-align: center; /* 中央揃え */
+    margin-bottom: 10px; /* タイマーとの間にスペースを追加 */
+}
+
+#countdown {
+    text-align: center; /* 中央揃え */
+    padding-right:4%;
+}
+
+
+
+#player-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 100vh; /* 画面全体の高さを使う */
+    margin-top: 20px;
+}
+
+#watched-message {
+    position: absolute; /* サムネイルの位置に合わせて配置 */
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 中央に配置 */
+    color: white; /* 文字色 */
+    background: rgba(0, 0, 0, 0.7); /* 半透明の背景 */
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center; /* 文字を中央揃え */
+}
+
+.centered-text {
+            text-align: center;
+            margin-top: 20%;
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #message-unsupported-browser, 
+        #message-unsupported-device, 
+        #message-countdown {
+            display: none; /* 初期は非表示 */
+        }
+
+        .video-js {
+            display: flex;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 50%;
+        }
+              
+
+        .video-js .vjs-control-bar {
+            display: none;
+        }
+
+        .video-js .vjs-big-play-button {
+            display: none;
+        }
+                       
+
+        .video-js.vjs-has-started .vjs-poster {
+            display: none;
+        }
+
+        .video-js.vjs-has-started::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .video-js.vjs-has-started .vjs-control-bar {
+            opacity: 1;
+        }
+        /*スマートフォン*/
+        @media (max-width: 600px) {
+        body {
+        background-color: lightblue;
+         }
+
+         #execute-button {
+         height: 26px;
+         padding:0;
+         font-size: 16px;
+        }
+
+        .video-js{
+            width:100%;
+            height: 20%;
+        }
+                
+        #watched-message {
+            top: 12%;
+            left: 50%;
+        }
+    }
+
+       
+        /*タブレット*/
+       @media (min-width: 601px) and (max-width: 900px) {
+       body {
+        background-color: lightgreen;
+         }
+
+         .video-js{
+            width:100%;
+            height: 30%;
+        }
+       }
+
+       #watched-message {
+            top: 16%;
+            left: 50%;
+        }
+
+        /*tablet-PC*/
+       @media (min-width: 901px) {
+       body {
+        background-color: lightcoral;
+        }
+
+        .video-js{
+            width:100%;
+            height: 30%;
+        }
+       }
+
+       /*PC*/
+       @media (min-width: 901px) and (orientation: landscape) {
+       body {
+        background-color: lightseagreen;
+       }
+       .video-js{
+            width:50%;
+            height: 50%;
+        }
+       
+        #watched-message {
+            top: 26%;
+            left: 50%;
+        }
+      }
+
+
+
+
+
+        /*ウィンドウの回転を禁止する*/
+        @media (orientation: landscape) {
+            body {
+                transform: rotate(0deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="http://anythingsave.html.xdomain.jp/">ホーム</a></li>
+                <li><a href="http://anythingsave.html.xdomain.jp/list/">所持リスト</a></li>
+                <li><a href="https://marshmallow-qa.com/anything_save">質問箱</a></li>
+                <li><a href="https://forms.gle/CPqsSMUE99paWa4NA">申し込み</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="password-container">
+        <input type="password" id="password-input" placeholder="パスワードを入力">
+        <button id="execute-button">ダウンロード</button>
+    </div>
+    <div id="warning">
+        <p>パスワードが間違っています。</p>
+    </div>
+    <div id="countdown">        
+        <div id="timer"></div>
+    </div>
+    
+    <div id="player-container" class="hide">
+        <video id="my-video" class="video-js" autoplay width="640" height="360" poster="サムネイル.png">
+            <source id="videoSource" src="" type="application/dash+xml">
+            お使いのブラウザはvideoタグに対応していません。
+        </video>
+        <div id="watched-message" style="display:none;">視聴済み</div>
+    </div>
+
+    <div id="overlay">
+        <h1 class="centered-text" id="message-unsupported-browser"></h1>
+        <h1 class="centered-text" id="message-unsupported-device"></h1>
+        <h1 class="centered-text" id="message-countdown"></h1>
+    </div>
+    <script src="index.js"></script>
+
+</body>
+</html>
