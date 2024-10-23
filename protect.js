@@ -35,6 +35,10 @@ document.addEventListener('keydown', function (e) {
     if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
         e.preventDefault();
     }
+
+    if (event.ctrlKey && event.key === 'u') {
+        event.preventDefault();
+    }
 });
 
 //ウィンドウの回転を禁止する
@@ -49,6 +53,8 @@ window.addEventListener('orientationchange', function () {
 window.addEventListener('gesturestart', function (e) {
     e.preventDefault();
 });
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     var video = document.getElementById('my-video');

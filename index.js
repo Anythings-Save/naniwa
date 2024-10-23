@@ -46,6 +46,13 @@ document.getElementById("execute-button").addEventListener("click", function () 
         player.src({ src: videoUrl, type: 'application/dash+xml' });
         player.load();
         player.play(); // 再生を開始
+        
+        // 動画が終了したときの処理
+        player.on('ended', function() {
+            // 前のページに戻る
+            window.history.back();
+        });
+        
     } else {
         // パスワードが一致しない場合
         if (!isPasswordCorrect) { // フラグがfalseの場合のみ警告を表示
