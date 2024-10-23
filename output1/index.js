@@ -11,8 +11,8 @@ document.getElementById("execute-button").addEventListener("click", function () 
     var encryptedPassword = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(password));
 
     // Base64でエンコードされた正しいパスワード
-     var correctPassword = "bmFuaXdhX183MjgwODA5"; // 正しいパスワード（Base64）
-    var base64VideoUrl = "aHR0cHM6Ly9hbnl0aGluZ3Mtc2F2ZS5naXRodWIuaW8vbmFuaXdhL291dHB1dC9pbmRleC5tcGQ="; // "http://localhost:8000/2/index.mpd"のBase64
+     var correctPassword = "MA=="; // 正しいパスワード（Base64）
+    var base64VideoUrl = "aHR0cHM6Ly9hbnl0aGluZ3Mtc2F2ZS5naXRodWIuaW8vbmFuaXdhL291dHB1dDEvaW5kZXgubXBk"; // "http://localhost:8000/2/index.mpd"のBase64
     var videoUrl = atob(base64VideoUrl); // Base64をデコードしてURLを取得
 
     // パスワードチェック
