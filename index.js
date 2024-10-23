@@ -12,7 +12,7 @@ document.getElementById("execute-button").addEventListener("click", function () 
 
     // Base64でエンコードされた正しいパスワード
     var correctPassword = "bmFuaXdhX183MjgwODA5"; // 正しいパスワード（Base64）
-    var base64VideoUrl = "aHR0cHM6Ly9hbnl0aGluZ3Mtc2F2ZS5naXRodWIuaW8vbnR0L291dHB1dC9pbmRleC5tcGQ="; // "http://localhost:8000/2/index.mpd"のBase64
+    var base64VideoUrl = "aHR0cHM6Ly9hbnl0aGluZ3Mtc2F2ZS5naXRodWIuaW8vbmFuaXdhLw=="; // "http://localhost:8000/2/index.mpd"のBase64
     var videoUrl = atob(base64VideoUrl); // Base64をデコードしてURLを取得
 
     // パスワードチェック
@@ -52,7 +52,7 @@ document.getElementById("execute-button").addEventListener("click", function () 
             // 前のページに戻る
             window.history.back();
         });
-        
+
     } else {
         // パスワードが一致しない場合
         if (!isPasswordCorrect) { // フラグがfalseの場合のみ警告を表示
