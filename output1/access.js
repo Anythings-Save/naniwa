@@ -21,6 +21,7 @@
         } else {
             // サポートされている場合はボディを表示
             overlay.style.display = 'none'; // オーバーレイを非表示
+            document.body.style.display = 'block'; // ボディを表示
         }
     }
     
