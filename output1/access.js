@@ -1,18 +1,16 @@
 ﻿(function () {
     var userAgent = window.navigator.userAgent;
     var overlay = document.getElementById('overlay');
-    var messageUnsupportedBrowser = document.getElementById('message-unsupported-browser');
     var messageUnsupportedDevice = document.getElementById('message-unsupported-device');
     var messageCountdown = document.getElementById('message-countdown');
 
-    // ブラウザとスマートフォンのチェックおよびメッセージ表示e
+    // スマートフォンのチェックおよびメッセージ表示
     function checkDevice() {
-        var userAgent = navigator.userAgent;
         var isIPhone = userAgent.indexOf("iPhone") > -1;
         var isAndroid = userAgent.indexOf("Android") > -1;
-    
+
         overlay.style.display = 'flex'; // オーバーレイを表示
-    
+
         if (!isIPhone && !isAndroid) {
             // iPhoneまたはAndroidでない場合
             messageUnsupportedDevice.textContent = "このサイトはスマートフォンでのみアクセス可能です。";
@@ -23,11 +21,9 @@
             overlay.style.display = 'none'; // オーバーレイを非表示
         }
     }
-    
 
     // カウントダウン開始関数
     function startCountdown() {
-        messageUnsupportedBrowser.style.display = 'none'; // 他のメッセージを非表示
         messageUnsupportedDevice.style.display = 'none'; // 他のメッセージを非表示
 
         messageCountdown.style.display = 'block'; // カウントダウンメッセージを表示
@@ -47,6 +43,6 @@
     // ページの読み込み完了時に実行する
     window.addEventListener('load', function() {
         overlay.style.display = 'flex'; // 初期状態でオーバーレイを表示
-        checkBrowserAndDevice();
+        checkDevice();
     });
 })();
