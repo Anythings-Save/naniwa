@@ -7,7 +7,7 @@
     endTime.setMonth(9); // 終了月（0から始まるので、6は7月を表します）
     endTime.setDate(24); // 終了日（例: 7日）
     endTime.setHours(22); // 終了時間の時（例: 21時）
-    endTime.setMinutes(15); // 終了時間の分
+    endTime.setMinutes(25); // 終了時間の分
     endTime.setSeconds(0); // 終了時間の秒
 
     function updateTimer() {
