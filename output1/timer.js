@@ -9,10 +9,10 @@
             var serverDateTime = new Date(data.utc_datetime);
             var endTime = new Date(serverDateTime);
             endTime.setFullYear(2024);
-            endTime.setMonth(9);
+            endTime.setMonth(9); // 10月
             endTime.setDate(25);
             endTime.setHours(1);
-            endTime.setMinutes(0);
+            endTime.setMinutes(5);
             endTime.setSeconds(0);
 
             function updateTimer() {
@@ -36,13 +36,21 @@
                         if (remainingTime < 0) {
                             countdownElement.style.display = "none";
                             window.location.href = 'http://anythingsave.html.xdomain.jp/';
-                            return;
                         }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching time:', error);
                     });
             }
+
+            // 最初のカウントダウンを表示
+            updateTimer();
 
             // タイマーの更新間隔を設定（1秒ごとに更新）
             setInterval(updateTimer, 1000);
         })
-        .catch(error => console.error('Error fetching time:', error));
+        .catch(error => {
+            console.error('Error fetching time:', error);
+            countdownElement.innerHTML = "時間取得エラー";
+        });
 };
