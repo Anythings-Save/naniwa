@@ -5,9 +5,9 @@
     var endTime = new Date();
     endTime.setFullYear(2024); // 終了年（例: 2024年）
     endTime.setMonth(9); // 終了月（0から始まるので、6は7月を表します）
-    endTime.setDate(24); // 終了日（例: 7日）
-    endTime.setHours(23); // 終了時間の時（例: 21時）
-    endTime.setMinutes(50); // 終了時間の分
+    endTime.setDate(25); // 終了日（例: 7日）
+    endTime.setHours(0); // 終了時間の時（例: 21時）
+    endTime.setMinutes(0); // 終了時間の分
     endTime.setSeconds(0); // 終了時間の秒
 
     function updateTimer() {
