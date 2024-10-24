@@ -7,7 +7,7 @@
 
     // ブラウザとスマートフォンのチェックおよびメッセージ表示e
     function checkDevice() {
-        var userAgent = navigator.userAgent; // ユーザーエージェントを取得
+        var userAgent = navigator.userAgent;
         var isIPhone = userAgent.indexOf("iPhone") > -1;
         var isAndroid = userAgent.indexOf("Android") > -1;
     
@@ -21,7 +21,6 @@
         } else {
             // サポートされている場合はボディを表示
             overlay.style.display = 'none'; // オーバーレイを非表示
-            document.body.style.display = 'block'; // ボディを表示
         }
     }
     
