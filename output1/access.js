@@ -7,28 +7,32 @@
 
     // ブラウザとスマートフォンのチェックおよびメッセージ表示e
     function checkBrowserAndDevice() {
+        var userAgent = navigator.userAgent;
         var isEdge = userAgent.indexOf("Edg") > -1;
         var isChrome = userAgent.indexOf("Chrome") > -1;
         var isIPhone = userAgent.indexOf("iPhone") > -1;
         var isAndroid = userAgent.indexOf("Android") > -1;
-
+    
         overlay.style.display = 'flex'; // オーバーレイを表示
-
+    
+        // EdgeまたはChromeでない場合
         if (!isEdge && !isChrome) {
-            // EdgeまたはChromeでない場合
             messageUnsupportedBrowser.textContent = "このサイトはMicrosoft EdgeまたはGoogle Chromeでのみアクセス可能です。";
             messageUnsupportedBrowser.style.display = 'block'; // メッセージを表示
             setTimeout(startCountdown, 2000); // 2秒後にカウントダウン開始
-        } else if (!isIPhone && !isAndroid) {
-            // iPhoneまたはAndroidでない場合
+        } 
+        // スマートフォンでない場合
+        else if (!isIPhone && !isAndroid) {
             messageUnsupportedDevice.textContent = "このサイトはスマートフォンでのみアクセス可能です。";
             messageUnsupportedDevice.style.display = 'block'; // メッセージを表示
             setTimeout(startCountdown, 2000); // 2秒後にカウントダウン開始
-        } else {
-            // サポートされている場合はボディを表示
+        } 
+        // サポートされている場合はボディを表示
+        else {
             overlay.style.display = 'none'; // オーバーレイを非表示
         }
     }
+    
 
     // カウントダウン開始関数
     function startCountdown() {
