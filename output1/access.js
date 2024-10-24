@@ -8,11 +8,9 @@
     // ブラウザとスマートフォンのチェックおよびメッセージ表示e
     function checkBrowserAndDevice() {
         var isEdge = userAgent.indexOf("Edg") > -1;
-var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1; // Edge ではない Chrome
-var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1; // Chrome ではない Safari
-var isIPhone = userAgent.indexOf("iPhone") > -1;
-var isAndroid = userAgent.indexOf("Android") > -1;
-
+        var isChrome = userAgent.indexOf("Chrome") > -1;
+        var isIPhone = userAgent.indexOf("iPhone") > -1;
+        var isAndroid = userAgent.indexOf("Android") > -1;
 
         overlay.style.display = 'flex'; // オーバーレイを表示
 
