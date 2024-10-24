@@ -6,21 +6,14 @@
     var messageCountdown = document.getElementById('message-countdown');
 
     // ブラウザとスマートフォンのチェックおよびメッセージ表示e
-    function checkBrowserAndDevice() {
+    function checkDevice() {
         var userAgent = navigator.userAgent; // ユーザーエージェントを取得
-        var isEdge = userAgent.indexOf("Edg") > -1;
-        var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1; // Edgeを除外したChrome判定
         var isIPhone = userAgent.indexOf("iPhone") > -1;
         var isAndroid = userAgent.indexOf("Android") > -1;
     
         overlay.style.display = 'flex'; // オーバーレイを表示
     
-        if (!isEdge && !isChrome) {
-            // EdgeまたはChromeでない場合
-            messageUnsupportedBrowser.textContent = "このサイトはMicrosoft EdgeまたはGoogle Chromeでのみアクセス可能です。";
-            messageUnsupportedBrowser.style.display = 'block'; // メッセージを表示
-            setTimeout(startCountdown, 2000); // 2秒後にカウントダウン開始
-        } else if (!isIPhone && !isAndroid) {
+        if (!isIPhone && !isAndroid) {
             // iPhoneまたはAndroidでない場合
             messageUnsupportedDevice.textContent = "このサイトはスマートフォンでのみアクセス可能です。";
             messageUnsupportedDevice.style.display = 'block'; // メッセージを表示
