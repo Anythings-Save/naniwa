@@ -1,0 +1,281 @@
+﻿
+body {
+    color: #262626;
+   
+ 
+}
+
+.container {
+    max-width: 1247px;
+    max-height: 728px;
+    
+}
+
+#site_logo{
+    position:fixed;    
+    left:12%;    
+    top:-14px;
+    height:70px;
+        
+}
+
+header {
+    border-bottom: 1px solid;
+    border-bottom-color: #F0F0F0;
+    height: 45px;
+}
+
+nav {
+    border: solid 1px #F0F0F0;
+    width:1247px;
+}
+
+    nav ul {
+        list-style: none;
+    }
+
+        nav ul::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+    nav li {
+        float: left;       
+        width: 25%;
+        text-align: center;
+    }
+
+    nav a {
+        display: block;
+        text-decoration: none;
+        color: #262626;
+    }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+.contents{
+    width:50%;    
+    margin:0 auto;
+}
+
+.contents h1{
+    font-size:28px;
+}
+
+.error{
+    width:100%;
+    height:100%;
+}
+
+.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#load {
+    /* 画面いっぱいになる箇所 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    transition: all 2s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+/* Loading画像中央配置　*/
+#load_logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    /* Loading アイコンの大きさ設定　*/
+    #load_logo img {
+        width: 260px;
+    }
+
+/* fadeUpをするアイコンの動き */
+.fadeUp {
+    animation-name: fadeUpAnime;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes fadeUpAnime {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.video-content {
+    width: 1247px; /*動画の横解像度に合わせる*/
+    
+}
+
+.video-content video{
+    width:100%;
+    height:100%;
+}
+
+
+
+@media only screen and (max-width: 375px) { /*iphone*/
+
+    /* サイト共通コンテナ */
+    .error {
+        display: none;
+    }
+
+    .contents * {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #load {
+        width: 100%;
+        height:100%;
+    }
+
+    nav li {
+        float: left;
+        width: 50%;
+    }
+
+    .video-content video {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 428px) { /*iphone*/
+
+    /* サイト共通コンテナ */
+    .error {
+        display: none;
+    }
+
+    .contents * {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #load {
+        width: 100%;
+        height:100%;
+    }
+
+    nav li {
+        float: left;
+        width: 50%;
+    }
+    
+    nav a{
+        font-size:25px;
+    }
+
+    .video-content video {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .error {
+        display: none;
+    }
+
+    .contents * {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #load {
+        width: 100%;
+        height:100%;
+    }
+
+    nav li {
+        float: left;
+        width: 50%;
+    }
+
+    nav a {
+        font-size: 25px;
+    }
+
+    .video-content video {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .error {
+        display: none;
+    }
+
+    .contents * {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #load {
+        width: 100%;
+        height: 100%;
+    }
+
+    nav li {
+        float: left;
+        width: 50%;
+    }
+
+    .video-content video {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+
+    @media only screen and (min-width: 1024px) {/*PC*/
+
+        .error {
+            display: none;
+        }
+
+        .video-content {
+            display: none;
+        }
+
+        nav {
+            width: 100%;
+        }
+
+        nav ul{
+            padding-left:5%;
+
+        }
+
+    }    
