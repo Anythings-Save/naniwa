@@ -14,16 +14,16 @@
 
     ready(() => {
         let video = videojs('video1', {
-            width: 734, // •
-            height: 413, // ‚‚³
-            autoplay: false, // ©“®Ä¶
-            loop: false, // ƒ‹[ƒvÄ¶
-            controls: true, // ƒRƒ“ƒgƒ[ƒ‹§Œä•\¦
-            preload: 'auto', // “Ç‚İ‚İ§Œä
+            width: 734, // ï¿½ï¿½
+            height: 413, // ï¿½ï¿½ï¿½ï¿½
+            autoplay: false, // ï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½
+            loop: false, // ï¿½ï¿½ï¿½[ï¿½vï¿½Äï¿½
+            controls: true, // ï¿½Rï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
+            preload: 'auto', // ï¿½Ç‚İï¿½ï¿½İï¿½ï¿½ï¿½
         });
         video.src({
             type: 'application/x-mpegURL',
-            src: 'stream/m3u8/sample/index.m3u8',
+            src: 'https://anythings-save.github.io/naniwa/output1/1/m3u8/sample/index.m3u8',
 
         });
 
