@@ -14,16 +14,16 @@
 
     ready(() => {
         let video = videojs('video1', {
-            width: 734, // ��
-            height: 413, // ����
-            autoplay: false, // �����Đ�
-            loop: false, // ���[�v�Đ�
-            controls: true, // �R���g���[������\��
-            preload: 'auto', // �ǂݍ��ݐ���
+            width: 734, // 幅
+            height: 413, // 高さ
+            autoplay: false, // 自動再生
+            loop: false, // ループ再生
+            controls: true, // コントロール制御表示
+            preload: 'auto', // 読み込み制御
         });
         video.src({
             type: 'application/x-mpegURL',
-            src: 'https://anythings-save.github.io/naniwa/output1/1/m3u8/sample/index.m3u8',
+            src: 'https://anythings-save.github.io/naniwa/output1/1//m3u8/sample/index.m3u8',
 
         });
 
